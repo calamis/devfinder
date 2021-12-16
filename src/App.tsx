@@ -11,18 +11,26 @@ import { fetchUsers } from './features/githubusers/githubuserSlice'
 
 
 function App() {
+  const { entities, loading, error} = useAppSelector((state) => state.users)
   const dispatch = useAppDispatch();
-  const { data, status } = useAppSelector((state) => state.users)
   const [query, setQuery] = React.useState('')
+  const [user, setUser] = React.useState({})
+
+  const fetchUser = async(query: string) => {
+      try {
+        const user = dispatch(fetchUsers(query)).unwrap()
+        console.log('user', user)
+      } catch (error) {
+        alert(`error, ${error.message}`)
+      }
+    }
 
   React.useEffect(() => {
-    if(query) {
-      dispatch(fetchUsers(query))
-    }
+    fetchUser(query)
   }, [dispatch, query])
   
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setQuery(e.currentTarget.value);
+    setQuery(e.currentTarget.value)
   };
 
   return (
@@ -38,7 +46,7 @@ function App() {
             onChange={handleChange} 
           />
 
-          {data? <CardDetails userdetails={data}  /> : null }
+          {entities ? <CardDetails userdetails={user}  /> : <div>No Data</div> }
         </Container>
     </>
   )

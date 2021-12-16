@@ -1,24 +1,37 @@
 import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
-// import { IUserDetails, IGithubUsers } from '../../utils/types'
+import { IUserDetails, UsersState, ValidationErrors, fetchUserResponse } from '../../utils/types'
 import axios from 'axios'
+import { AxiosError } from 'axios'
 
 // declare type
 // type userState = IGithubUsers
 
 // Define a thunk that disaptches those action creators
-export const fetchUsers = createAsyncThunk("users/usersListLoading", async (query: string) => {
-    const response = await axios.get(`https://api.github.com/users/${query}`)
-    return response.data;
+export const fetchUsers = createAsyncThunk<IUserDetails, (query: string) => Partial<IUserDetails>, 
+  {
+    rejectValue: ValidationErrors
+  }>(
+  "users/usersListLoading", async (query, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`https://api.github.com/users/${query}`)
+      return response.data;
+    } catch (err) {
+      let error: AxiosError<ValidationErrors> = err // cast the error for access
+      if (!error.response) {
+        throw err
+      }
+      return rejectWithValue(error.response.data)
+    }
   }
 );
 
 // initial State
 const initialState = {
-    data: [],
-    status: 'idle',
-    error: {}
-}
+  data: {},
+  error: null,
+  loading: 'idle'
+} as unknown as UsersState
 
 // Create Slice that handle actions in your reducers
 export const githubUserSlice = createSlice({
@@ -30,24 +43,20 @@ export const githubUserSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchUsers.pending.type]: (state, action) => {
-      state = {
-        status: "loading",
-        data: [],
-        error: {}
+      if(state.loading === 'idle') {
+        state.loading = 'pending'
+        state.entities = action.payload
       }
     },
     [fetchUsers.fulfilled.type]: (state, action) => {
-      state = {
-        status: "loaded",
-        data: state.data = action.payload,
-        error: {}
-      }
+      state.entities = action.payload
     },
+
     [fetchUsers.rejected.type]: (state, action) => {
-      state = {
-        status: "error",
-        data: [],
-        error: action.payload
+      if (action.payload) {
+        state.error = action.payload.errorMessage
+      } else {
+        state.error = action.error.message
       }
     }
   }
