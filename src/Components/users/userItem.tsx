@@ -1,15 +1,14 @@
 import { InfoRounded } from '@mui/icons-material';
-import { Link } from "react-router-dom";
 import { Button, Avatar, CardMedia, Box, Card, Typography, Chip } from '@mui/material';
 import React, { FunctionComponent } from 'react';
 import { IUserDetails } from '../../utils/types'
 
 interface UserProps {
-  data: Record<string, IUserDetails> | undefined
+  user: {}
 }
 
-const CardDetails = ({ data }: UserProps ) => {
-  console.log('details', data);
+const userItem = ({ user }: UserProps ) => {
+  console.log('details', user);
   return (
     <>
       <Card
@@ -42,7 +41,7 @@ const CardDetails = ({ data }: UserProps ) => {
           123 Main St, Phoenix, AZ
         </Typography>
         <Typography component="div" fontWeight="bold">
-          {data?.name}
+          {/* {data?.name} */}
         </Typography>
         <Box
           sx={{
@@ -59,9 +58,7 @@ const CardDetails = ({ data }: UserProps ) => {
               theme.palette.mode === 'dark' ? '#fff' : 'primary.700',
           }}
         >  
-          <Link to={`/user/${data?.login}`}>
-            < Chip component="a" label="View Profile" variant="outlined" />
-          </Link>
+          <Chip component="a" label="View Profile" variant="outlined" clickable href="/" />
         </Box>
       </Box>
       </Card>
@@ -69,4 +66,4 @@ const CardDetails = ({ data }: UserProps ) => {
   )
 }
 
-export default CardDetails
+export default userItem

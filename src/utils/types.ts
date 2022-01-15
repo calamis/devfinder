@@ -1,7 +1,10 @@
 export interface IUserDetails {
-  firstName: string,
-  // lastName: string,
-  // email: string
+  name: string,
+  email: string,
+  company: string,
+  address: string,
+  phone: string,
+  website: string
 }
 
 export interface fetchUserResponse {
@@ -15,7 +18,7 @@ export interface ValidationErrors {
 }
 
 export interface UsersState  {
-  entities: Record<string, IUserDetails>,
-  error: string | null | undefined,
-  loading: string
+  entities: Record<string, IUserDetails> | undefined | {},
+  error: string | null | undefined | any,
+  loading: boolean
 }

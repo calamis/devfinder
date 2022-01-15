@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// slice here
-import { githubUserSlice } from '../features/githubusers/githubuserSlice';
+// import slice here
+import githubUserSlice from '../features/githubusers/githubuserSlice';
 
 export const store = configureStore({
   reducer: {
-    users: githubUserSlice.reducer
+    users: githubUserSlice
     // Define a top-level state field handle by reducer/slice
     // users: githubUsers //githubUserSlice.reducer,
   }

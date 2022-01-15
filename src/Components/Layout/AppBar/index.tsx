@@ -4,19 +4,22 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import Link from '@mui/material/Link';
 
 export default function HeaderBar() {
   return (
-    <Box sx={{ flexGrow: 1, alignContent: 'center' }} marginBottom={5} >
+    <>
+    <Box sx={{ flexGrow: 1 }}  marginBottom={5} >
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
             Github Finder
           </Typography>
+          <Link href="/" color="inherit">Home</Link>
+          <Link href="/about" color="inherit">About</Link>
         </Toolbar>
       </AppBar>
     </Box>
+    </>
   );
 }

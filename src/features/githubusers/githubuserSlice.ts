@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction,  createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 import { IUserDetails, UsersState, ValidationErrors, fetchUserResponse } from '../../utils/types'
 import axios from 'axios'
@@ -8,29 +8,43 @@ import { AxiosError } from 'axios'
 // type userState = IGithubUsers
 
 // Define a thunk that disaptches those action creators
-export const fetchUsers = createAsyncThunk<IUserDetails, (query: string) => Partial<IUserDetails>, 
-  {
-    rejectValue: ValidationErrors
-  }>(
-  "users/usersListLoading", async (query, { rejectWithValue }) => {
+export const fetchUserProfile = createAsyncThunk(
+  "fetch/userProfile", 
+  async (query: string | undefined, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`https://api.github.com/users/${query}`)
-      return response.data;
+      const { data } = await axios.get(`https://api.github.com/users/${query}`)
+      // const {data} = await axios.get(`https://api.github.com/users/${query}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`) 
+      return data;
     } catch (err) {
       let error: AxiosError<ValidationErrors> = err // cast the error for access
-      if (!error.response) {
+      if (!error?.response) {
         throw err
       }
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error?.response?.data)
     }
   }
 );
 
+// export const fetchUserRepos = createAsyncThunk(
+//   "fetch/userRepos", 
+//   async (query: string, {rejectWithValue}) => {
+//     try {
+//       const { data } = await axios.get(`https://api.github.com/users/${query}/repos?per_page=10&sort=asc`)
+//       return data;
+//     } catch (err) {
+//       let error: AxiosError<ValidationErrors> = err // cast the error for access
+//       if (!error?.response) {
+//         throw err
+//       }
+//       return rejectWithValue(error.response.data)
+//     }
+//   }
+// );
+
 // initial State
 const initialState = {
-  data: {},
   error: null,
-  loading: 'idle'
+  loading: false
 } as unknown as UsersState
 
 // Create Slice that handle actions in your reducers
@@ -42,28 +56,35 @@ export const githubUserSlice = createSlice({
   // Key names will be used to generate actions:
   reducers: {},
   extraReducers: {
-    [fetchUsers.pending.type]: (state, action) => {
-      if(state.loading === 'idle') {
-        state.loading = 'pending'
-        state.entities = action.payload
-      }
+    // user Profile
+    [fetchUserProfile.pending.type]: (state) => {
+      state.loading = true
     },
-    [fetchUsers.fulfilled.type]: (state, action) => {
-      state.entities = action.payload
+    [fetchUserProfile.fulfilled.type]: (state, action) => {
+      state.loading = false
+      state.entities = action?.payload
+      state.error = undefined
     },
-
-    [fetchUsers.rejected.type]: (state, action) => {
-      if (action.payload) {
-        state.error = action.payload.errorMessage
-      } else {
-        state.error = action.error.message
-      }
+    [fetchUserProfile.rejected.type]: (state, action) => {
+      state.loading = false
+      state.entities = undefined
+      state.error = action?.payload
     }
+    // User Repo
+    // [fetchUserRepos.pending.type]: (state) => {
+    //   state.loading = true
+    // },
+    // [fetchUserRepos.fulfilled.type]: (state, action) => {
+    //   state.loading = false
+    //   state.entities = action?.payload
+    //   state.error = undefined
+    // },
+    // [fetchUserRepos.rejected.type]: (state, action) => {
+    //   state.loading = false
+    //   state.entities = undefined
+    //   state.error = action?.payload
+    // }
   }
 });
-
-
-// export const selectAllUsers = state => state.user
-// Selector
 
 export default githubUserSlice.reducer

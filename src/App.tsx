@@ -1,55 +1,34 @@
 import * as React from 'react';
-import InputField from './Components/TextField';
-import SearchIcon from '@mui/icons-material/Search'
-import HeaderBar from './Components/AppBar';
-import Container from '@mui/material/Container';
-import CardDetails from './Components/Card';
+import { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Routes
+} from "react-router-dom";
 
-// redux
-import { useAppDispatch, useAppSelector } from './app/hooks'
-import { fetchUsers } from './features/githubusers/githubuserSlice'
+import HeaderBar from './Components/Layout/AppBar';
+import { IUserDetails } from './utils/types'; 
+
+
+// pages
+import Home from './pages/home'
+import Profile from './pages/profile'
+import About from './pages/about'
 
 
 function App() {
-  const { entities, loading, error} = useAppSelector((state) => state.users)
-  const dispatch = useAppDispatch();
-  const [query, setQuery] = React.useState('')
-  const [user, setUser] = React.useState({})
-
-  const fetchUser = async(query: string) => {
-      try {
-        const user = dispatch(fetchUsers(query)).unwrap()
-        console.log('user', user)
-      } catch (error) {
-        alert(`error, ${error.message}`)
-      }
-    }
-
-  React.useEffect(() => {
-    fetchUser(query)
-  }, [dispatch, query])
-  
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setQuery(e.currentTarget.value)
-  };
-
   return (
     <>
       <HeaderBar />
-        <Container maxWidth="md">
-          <InputField 
-            label="Search Github User"
-            value={query}
-            iconPosition="end"
-            icon={<SearchIcon />}
-            variant="outlined"
-            onChange={handleChange} 
-          />
-
-          {entities ? <CardDetails userdetails={user}  /> : <div>No Data</div> }
-        </Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="user/:name" element={<Profile />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
     </>
   )
 }
 
 export default App
+
