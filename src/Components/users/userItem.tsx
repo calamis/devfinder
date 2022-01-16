@@ -1,16 +1,20 @@
 import { InfoRounded } from '@mui/icons-material';
-import { Button, Avatar, CardMedia, Box, Card, Typography, Chip } from '@mui/material';
+import {  Container, Button, Avatar, CardMedia, Box, Card, Typography, Chip } from '@mui/material';
 import React, { FunctionComponent } from 'react';
 import { IUserDetails } from '../../utils/types'
 
 interface UserProps {
-  user: {}
+  user: {
+    name: string
+    login: string
+    location: string
+    avatar_url: string
+  }
 }
 
 const userItem = ({ user }: UserProps ) => {
-  console.log('details', user);
   return (
-    <>
+    <Container maxWidth="md" sx={{ mt: '10px'}}>
       <Card
         variant="outlined"
         sx={{
@@ -26,8 +30,8 @@ const userItem = ({ user }: UserProps ) => {
           component="img"
           width="100"
           height="100"
-          alt="123 Main St, Phoenix, AZ cover"
-          src="https://mui.com/static/images/cards/real-estate.png"
+          alt={user?.location ?? null }
+          src={user?.avatar_url}
           sx={{
             borderRadius: 0.5,
             width: { xs: '100%', sm: 100 },
@@ -38,10 +42,10 @@ const userItem = ({ user }: UserProps ) => {
 
       <Box sx={{ alignSelf: 'center', ml: 2 }}>
         <Typography variant="body2" color="text.secondary">
-          123 Main St, Phoenix, AZ
+        {user?.location ?? null }
         </Typography>
         <Typography component="div" fontWeight="bold">
-          {/* {data?.name} */}
+          {user?.name}
         </Typography>
         <Box
           sx={{
@@ -58,11 +62,11 @@ const userItem = ({ user }: UserProps ) => {
               theme.palette.mode === 'dark' ? '#fff' : 'primary.700',
           }}
         >  
-          <Chip component="a" label="View Profile" variant="outlined" clickable href="/" />
+          <Chip component="a" color="primary" label="View Profile" variant="filled" clickable href={`/user/${user?.login}`} />
         </Box>
       </Box>
       </Card>
-    </>
+    </Container>
   )
 }
 

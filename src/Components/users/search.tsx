@@ -1,13 +1,8 @@
 import * as React from 'react'
 import {useEffect} from 'react'
-import Container from '@mui/material/Container';
-import SearchIcon from '@mui/icons-material/Search'
-import { Button, Grid } from '@mui/material'
+import { Container, Button, Grid } from '@mui/material'
 
 // Components
-import CardDetails from '../Card';
-import LinearSpinner from '../Layout/Spinner';
-import InputField from '../TextField';
 import FormTextField from '../TextField/FormTextField'
 
 // Formik
@@ -30,10 +25,10 @@ const Search = () => {
   const [user, setUser] = React.useState('')
 
   useEffect(() => {
-   dispatch(fetchUserProfile(user));
+    if(user) {
+      dispatch(fetchUserProfile(user));
+    }
   }, [dispatch, user])
-
-  const { entities, loading, error} = useAppSelector((state) => state.users)
 
   const validationSchema = yup.object().shape({
     username: yup.string().required("Field is required")
@@ -52,8 +47,6 @@ const Search = () => {
                 values: FormValues,
                 FormikHelpers: FormikHelpers<FormValues>
               ) => {
-                // alert(JSON.stringify(values, null, 2));
-                // const searchValue = JSON.stringify(value
                   dispatch(fetchUserProfile(values.username))
                 FormikHelpers.setSubmitting(false)
               }}
@@ -61,18 +54,7 @@ const Search = () => {
               {(formikProps: FormikProps<FormValues>) => (
                 <Form noValidate autoComplete='off'>
                   <Grid container spacing={2}>
-                    <Grid item xs={8}>
-                    {/* <InputField
-                        label="Search Github User"
-                        name="username"
-                        iconPosition="end"
-                        icon={<SearchIcon />}
-                        variant="outlined"
-                        value={formik.values.username}
-                        onChange={formik.handleChange}
-                        error={formik.touched.username && formik.errors.username}
-                        helperText={formik.touched.username && formik.errors.username}
-                      /> */}
+                    <Grid item xs={12} sm={10}>
                       <Field
                         fullWidth
                         label="Search Github User"
@@ -80,8 +62,10 @@ const Search = () => {
                         component={FormTextField}
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={2}>
                       <Button 
+                        fullWidth
+                        sx={{ height: '55px'}}
                         variant="contained" 
                         type="submit"
                         disabled={formikProps.isSubmitting}
@@ -93,15 +77,6 @@ const Search = () => {
                 </Form>
               )}  
             </Formik>
-            {/* <CardDetails /> */}
-            {/* {!entities ? <LinearSpinner /> : <CardDetails data={entities} />} */}
-            {/* {loading ? (
-              <LinearSpinner />
-            ) : error ? (
-              <>{error?.message}</>
-            ) : (
-              <CardDetails data={entities} />
-            ) } */}
         </Container> 
     </>
   )

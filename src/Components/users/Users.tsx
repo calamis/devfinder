@@ -8,18 +8,23 @@ import { IUserDetails } from '../../utils/types'
 import { useAppSelector } from '../../app/hooks'
 import LinearSpinner from '../../Components/Layout/Spinner'
 import { fetchUserProfile } from '../../features/githubusers/githubuserSlice'
+import { Alert, Container } from '@mui/material'
 
 const User = () => {
-  const { entities = [], loading, error } = useAppSelector((state) => state.users)
+  const { entities, loading, error } = useAppSelector((state) => state.users)
   
   if(loading) {
-    return <LinearSpinner />
-  } else {
+    return <Container maxWidth="md" sx={{ mt: '10px'}}><LinearSpinner /></Container>
+  } else if(entities) {
     return (
       <>
         <UserItem user={entities} />
       </>
     )
+  } else if(error) {
+    return <Container maxWidth="md" sx={{ mt: '10px'}}><Alert severity="error">{error?.message}</Alert></Container>
+  } else {
+    return null
   }
 }
 

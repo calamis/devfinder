@@ -18,7 +18,8 @@ export interface ValidationErrors {
 }
 
 export interface UsersState  {
-  entities: Record<string, IUserDetails> | undefined | {},
+  // entities: Record<string, IUserDetails> | undefined | {},
+  entities: any,
   error: string | null | undefined | any,
   loading: boolean
 }

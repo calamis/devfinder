@@ -10,7 +10,7 @@ export default function HeaderBar() {
   return (
     <>
     <Box sx={{ flexGrow: 1 }}  marginBottom={5} >
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
             Github Finder
