@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import { Stack } from '@mui/material';
 
 export default function HeaderBar() {
   return (
@@ -15,8 +16,10 @@ export default function HeaderBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
             Github Finder
           </Typography>
-          <Link href="/" color="inherit">Home</Link>
-          <Link href="/about" color="inherit">About</Link>
+          <Stack spacing={2} direction="row">
+            <Link href="/" color="inherit">Home</Link>
+            <Link href="/about" color="inherit">About</Link>
+          </Stack>
         </Toolbar>
       </AppBar>
     </Box>
