@@ -7,7 +7,6 @@ export const store = configureStore({
   reducer: {
     users: githubUserSlice
     // Define a top-level state field handle by reducer/slice
-    // users: githubUsers //githubUserSlice.reducer,
   }
 })
 

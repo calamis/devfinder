@@ -17,15 +17,16 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 // redux
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import LinearSpinner from '../Components/Layout/Spinner'
-import { fetchUserProfile } from '../features/githubusers/githubuserSlice'
+import { fetchUserProfile, fetchUserRepos } from '../features/githubusers/githubuserSlice'
 
 export default function profile() {
   const dispatch = useAppDispatch();
   let { name } = useParams();
-  const { entities = [], loading, error} = useAppSelector((state) => state.users)
+  const { entities = [], repos, loading, error} = useAppSelector((state) => state.users)
 
   React.useEffect(() => {
     dispatch(fetchUserProfile(name))
+    dispatch(fetchUserRepos(name))
     // eslint-disable-next-line
   }, [])
 
@@ -105,20 +106,25 @@ export default function profile() {
             <Typography component="h2" variant="subtitle1" fontWeight="bold" sx={{color: '#455A64'}}>
               Top Repository
             </Typography>
-            
-            <Card sx={{ minWidth: 275, marginTop: 2 }} >
-              <CardContent>
-                <Typography component="h2" variant="subtitle1" fontWeight="bold" sx={{color: '#455A64'}}>
-                  Card Title
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  aasdas asd asdas das dasd asdasdsad sad
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">JavaScript</Button>
-              </CardActions>
-            </Card>
+              {repos?.map((repo) => {
+                return (
+                <>
+                  <Card sx={{ minWidth: 100, marginTop: 2 }} >
+                    <CardContent>
+                      <Typography component="h2" variant="subtitle1" fontWeight="bold" sx={{ color: '#455A64' }}>
+                       <Link href={repo.html_url}>{repo.name}</Link>
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        {repo.description ?? 'N/A'}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">{repo.language}</Button>
+                    </CardActions>
+                  </Card>
+                  </>
+                  )
+              })}
 
           </Box>
         </Grid>

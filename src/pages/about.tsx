@@ -10,6 +10,7 @@ const About = () => {
       <h2>About this APP</h2>
       <p>React app to search Github profiles</p>
       <p>Version: 1.0.0</p>
+      <p>Tech Stack: React, Redux Toolkit, MaterialUI, Formik, TypeScript</p>
       <p>Follow me:</p>
       <Stack spacing={2} direction="row">
         <Link href="https://twitter.com/cnalamis" color="inherit">Twitter</Link>
