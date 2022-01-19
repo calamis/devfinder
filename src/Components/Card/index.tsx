@@ -1,8 +1,7 @@
-import { InfoRounded } from '@mui/icons-material';
 import { Link } from "react-router-dom";
-import { Button, Avatar, CardMedia, Box, Card, Typography, Chip } from '@mui/material';
-import React, { FunctionComponent } from 'react';
+import { CardMedia, Box, Card, Typography, Chip } from '@mui/material';
 import { IUserDetails } from '../../utils/types'
+import React from "react";
 
 interface UserProps {
   data: Record<string, IUserDetails> | undefined

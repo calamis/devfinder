@@ -1,14 +1,11 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Routes
 } from "react-router-dom";
 
 import HeaderBar from './Components/Layout/AppBar';
-import { IUserDetails } from './utils/types'; 
 
 
 // pages
