@@ -12,11 +12,11 @@ import EmailIcon from '@mui/icons-material/Email';
 import LinkIcon from '@mui/icons-material/Link';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
-import { IProfile } from '../utils/types' 
+import { IProfile } from '../../utils/types' 
 
 // redux
-import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { fetchUserProfile, fetchUserRepos } from '../features/githubusers/githubuserSlice'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { fetchUserProfile, fetchUserRepos } from '../../features/githubusers/githubuserSlice'
 
 export default function profile() {
   const dispatch = useAppDispatch();
@@ -105,7 +105,7 @@ export default function profile() {
             <Typography component="h2" variant="subtitle1" fontWeight="bold" sx={{color: '#455A64'}}>
               Top Github Repository
             </Typography>
-              {repos?.map((repo: IProfile, index) => {
+              {repos?.map((repo: IProfile, index: any) => {
                 return (
                   <Card sx={{ minWidth: 100, marginTop: 2 }} key={index}>
                     <CardContent>

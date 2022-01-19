@@ -9,9 +9,9 @@ import HeaderBar from './Components/Layout/AppBar';
 
 
 // pages
-import Home from './pages/home'
-import Profile from './pages/profile'
-import About from './pages/about'
+import Home from './pages/home/home'
+import Profile from './pages/profile/profile'
+import About from './pages/about/about'
 
 
 function App() {

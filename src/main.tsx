@@ -5,7 +5,7 @@ import App from './App'
 import { Provider } from 'react-redux'
 import { store } from './app/store'
 import { ThemeProvider } from '@mui/material/styles'
-import theme from '../src/utils/theme'
+import theme from './utils/theme'
 import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter } from 'react-router-dom';
 
