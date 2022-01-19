@@ -15,9 +15,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, 'index.html'),
-        home: resolve(root, 'pages/home/home.html'),
-        about: resolve(root,  'pages/about/about.html'),
-        profile: resolve(root, 'pages/profile/profile.html')
+        home: resolve(root, 'pages/home/index.html'),
+        about: resolve(root,  'pages/about/index.html'),
+        profile: resolve(root, 'pages/profile/index.html')
       }
     }
   }
