@@ -23,3 +23,10 @@ export interface UsersState  {
   error: string | null | undefined | any,
   loading: boolean
 }
+
+export interface IProfile {
+  html_url: string
+  name: string
+  description: string
+  language: string
+}

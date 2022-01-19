@@ -23,7 +23,7 @@ export const fetchUserProfile = createAsyncThunk(
 
 export const fetchUserRepos = createAsyncThunk(
   "fetch/userRepos", 
-  async (query: string, {rejectWithValue}) => {
+  async (query: string | undefined, {rejectWithValue}) => {
     try {
       const { data } = await axios.get(`https://api.github.com/users/${query}/repos?per_page=10&sort=asc`)
       return data;

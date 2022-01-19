@@ -1,28 +1,27 @@
 import * as React from 'react'
 import { useParams  } from "react-router-dom";
-import { Box, Container, Grid, Stack, Typography } from '@mui/material'
-import Card from '@mui/material/Card';
+import { Box, Container, Grid, Stack, Typography, Card } from '@mui/material'
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Link from '@mui/material/Link';
-
 import TwitterIcon from '@mui/icons-material/Twitter';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkIcon from '@mui/icons-material/Link';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
+import { IProfile } from '../utils/types' 
+
 // redux
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import LinearSpinner from '../Components/Layout/Spinner'
 import { fetchUserProfile, fetchUserRepos } from '../features/githubusers/githubuserSlice'
 
 export default function profile() {
   const dispatch = useAppDispatch();
   let { name } = useParams();
-  const { entities = [], repos, loading, error} = useAppSelector((state) => state.users)
+  const { entities = [], repos } = useAppSelector((state) => state.users)
 
   React.useEffect(() => {
     dispatch(fetchUserProfile(name))
@@ -104,15 +103,14 @@ export default function profile() {
           </Box>
           <Box mt={10}>
             <Typography component="h2" variant="subtitle1" fontWeight="bold" sx={{color: '#455A64'}}>
-              Top Repository
+              Top Github Repository
             </Typography>
-              {repos?.map((repo) => {
+              {repos?.map((repo: IProfile, index) => {
                 return (
-                <>
-                  <Card sx={{ minWidth: 100, marginTop: 2 }} >
+                  <Card sx={{ minWidth: 100, marginTop: 2 }} key={index}>
                     <CardContent>
                       <Typography component="h2" variant="subtitle1" fontWeight="bold" sx={{ color: '#455A64' }}>
-                       <Link href={repo.html_url}>{repo.name}</Link>
+                       <Link href={repo.html_url} underline="none">{repo.name}</Link>
                       </Typography>
                       <Typography sx={{ mb: 1.5 }} color="text.secondary">
                         {repo.description ?? 'N/A'}
@@ -122,10 +120,8 @@ export default function profile() {
                       <Button size="small">{repo.language}</Button>
                     </CardActions>
                   </Card>
-                  </>
                   )
               })}
-
           </Box>
         </Grid>
       </Grid>
