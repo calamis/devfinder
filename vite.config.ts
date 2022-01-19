@@ -1,14 +1,7 @@
-const { resolve } = require("path");
-const { defineConfig } = require("vite");
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-module.exports = defineConfig({
-    build: {
-        rollupOptions: {
-            input: {
-                main: resolve(__dirname, "index.html"),
-                login: resolve(__dirname, "pages/login/index.html"),
-                home: resolve(__dirname, "pages/home/index.html"),
-            },
-        },
-    },
-});
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()]
+})
