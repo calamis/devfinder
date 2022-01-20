@@ -14,10 +14,10 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        home: resolve(__dirname, 'pages/home/index.html'),
-        about: resolve(__dirname,  'pages/about/index.html'),
-        profile: resolve(__dirname, 'pages/profile/index.html')      }
+        main: resolve(root, 'index.html'),
+        home: resolve(root, 'pages/home/index.html'),
+        about: resolve(root,  'pages/about/index.html'),
+        profile: resolve(root, 'pages/profile/index.html')      }
     }
   }
 })
