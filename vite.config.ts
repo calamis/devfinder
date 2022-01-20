@@ -14,10 +14,10 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(root, 'index.html'),
-        home: resolve(root, 'pages/home/index.html'),
-        about: resolve(root,  'pages/about/index.html'),
-        profile: resolve(root, 'pages/profile/index.html')
+        main: new URL(root, 'index.html').pathname,
+        home: new URL(root, 'pages/home/index.html').pathname,
+        about: new URL(root,  'pages/about/index.html').pathname,
+        profile: new URL(root, 'pages/profile/index.html').pathname
       }
     }
   }
