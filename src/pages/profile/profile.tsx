@@ -19,7 +19,6 @@ import {
   fetchUserProfile,
   fetchUserRepos,
 } from '../../features/githubusers/githubuserSlice';
-
 export default function profile() {
   const dispatch = useAppDispatch();
   let { name } = useParams();
