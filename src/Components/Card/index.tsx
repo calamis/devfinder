@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { CardMedia, Box, Card, Typography, Chip } from '@mui/material';
-import { IUserDetails } from '../../utils/types'
-import React from "react";
+import { IUserDetails } from '../../utils/types';
+import React from 'react';
 
 interface UserProps {
-  data: Record<string, IUserDetails> | undefined
+  data: Record<string, IUserDetails> | undefined;
 }
 
-const CardDetails = ({ data }: UserProps ) => {
+const CardDetails = ({ data }: UserProps) => {
   console.log('details', data);
   return (
     <>
@@ -20,8 +20,7 @@ const CardDetails = ({ data }: UserProps ) => {
             xs: 'column', // mobile
             sm: 'row', // tablet and up
           },
-        }}
-      >
+        }}>
         <CardMedia
           component="img"
           width="100"
@@ -36,36 +35,34 @@ const CardDetails = ({ data }: UserProps ) => {
           }}
         />
 
-      <Box sx={{ alignSelf: 'center', ml: 2 }}>
-        <Typography variant="body2" color="text.secondary">
-          123 Main St, Phoenix, AZ
-        </Typography>
-        <Typography component="div" fontWeight="bold">
-          {data?.name}
-        </Typography>
-        <Box
-          sx={{
-            ml: -1,
-            mt: 0.75,
-            px: 1,
-            py: 0.5,
-            borderRadius: 1,
-            display: 'flex',
-            typography: 'caption',
-            bgcolor: (theme) => 
-              theme.palette.mode === 'dark' ? 'primary.900' : 'primary.50',
-            color: (theme) => 
-              theme.palette.mode === 'dark' ? '#fff' : 'primary.700',
-          }}
-        >  
-          <Link to={`/user/${data?.login}`}>
-            < Chip component="a" label="View Profile" variant="outlined" />
-          </Link>
+        <Box sx={{ alignSelf: 'center', ml: 2 }}>
+          <Typography variant="body2" color="text.secondary">
+            123 Main St, Phoenix, AZ
+          </Typography>
+          <Typography component="div" fontWeight="bold">
+            {data?.name}
+          </Typography>
+          <Box
+            sx={{
+              ml: -1,
+              mt: 0.75,
+              px: 1,
+              py: 0.5,
+              borderRadius: 1,
+              display: 'flex',
+              typography: 'caption',
+              bgcolor: (theme) =>
+                theme.palette.mode === 'dark' ? 'primary.900' : 'primary.50',
+              color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : 'primary.700'),
+            }}>
+            <Link to={`${data?.login}`}>
+              <Chip component="a" label="View Profile" variant="outlined" />
+            </Link>
+          </Box>
         </Box>
-      </Box>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default CardDetails
+export default CardDetails;
