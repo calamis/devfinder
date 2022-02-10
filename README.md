@@ -1,6 +1,6 @@
 # Github Finder
 
-A small project using the Tech Stack that search a specific github user by username.
+A small project using the Tech Stack that searches a specific GitHub user by username.
 
 #Tech Stack :
 
@@ -11,4 +11,5 @@ A small project using the Tech Stack that search a specific github user by usern
 ![Formik](https://img.shields.io/badge/-Formik-007FFF?style=flat-square&logo=formik)
 
 # Screenshot
+
 ![Alt text](/src/public/githubfinder.png?raw=true 'Github Finder')
