@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HeaderBar from './Components/Layout/AppBar';
 // pages
 import Home from './pages/home/home';
@@ -9,12 +9,14 @@ import About from './pages/about/about';
 function App() {
   return (
     <>
-      <HeaderBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/user/:name" element={<Profile />} />
-      </Routes>
+      <Router>
+        <HeaderBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/user/:name" element={<Profile />} />
+        </Routes>
+      </Router>
     </>
   );
 }

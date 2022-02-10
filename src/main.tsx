@@ -7,16 +7,13 @@ import { store } from './app/store';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './utils/theme';
 import CssBaseline from '@mui/material/CssBaseline';
-import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <App />
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,
