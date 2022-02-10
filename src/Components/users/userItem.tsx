@@ -1,4 +1,5 @@
 import { InfoRounded } from '@mui/icons-material';
+import { Link, Outlet } from 'react-router-dom';
 import {
   Container,
   Button,
@@ -68,16 +69,19 @@ const userItem = ({ user }: UserProps) => {
                 theme.palette.mode === 'dark' ? 'primary.900' : 'primary.50',
               color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : 'primary.700'),
             }}>
-            <Chip
-              component="a"
-              color="primary"
-              label="View Profile"
-              variant="filled"
-              clickable
-              href={`${user?.login}`}
-            />
+            <Link to={`${user?.login}`}>
+              <Chip
+                component="a"
+                color="primary"
+                label="View Profile"
+                variant="filled"
+                clickable
+                href={`${user?.login}`}
+              />
+            </Link>
           </Box>
         </Box>
+        <Outlet />
       </Card>
     </Container>
   );

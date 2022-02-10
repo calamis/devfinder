@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { CardMedia, Box, Card, Typography, Chip } from '@mui/material';
 import { IUserDetails } from '../../utils/types';
 import React from 'react';

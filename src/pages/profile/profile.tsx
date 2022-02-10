@@ -11,7 +11,6 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkIcon from '@mui/icons-material/Link';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-
 import { IProfile } from '../../utils/types';
 // redux
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
