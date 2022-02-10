@@ -55,8 +55,8 @@ const CardDetails = ({ data }: UserProps) => {
                 theme.palette.mode === 'dark' ? 'primary.900' : 'primary.50',
               color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : 'primary.700'),
             }}>
-            <Link to={`${data?.login}`}>
-              <Chip component="a" label="View Profile" variant="outlined" />
+            <Link to={`${data?.login}`} style={{ textDecoration: 'none' }}>
+              <Chip component="button" label="View Profile s" variant="outlined" />
             </Link>
           </Box>
         </Box>

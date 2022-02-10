@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, Container, Grid, Stack, Typography, Card } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -33,6 +33,18 @@ export default function profile() {
     <Container maxWidth="md" sx={{ marginBottom: 5 }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
+          <RouterLink to="/" style={{ textDecoration: 'none' }}>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                textDecoration: 'none',
+                marginBottom: '20px',
+                borderRadius: '3px',
+              }}>
+              Back
+            </Button>
+          </RouterLink>
           <Card>
             <CardMedia
               component="img"

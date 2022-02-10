@@ -69,14 +69,13 @@ const userItem = ({ user }: UserProps) => {
                 theme.palette.mode === 'dark' ? 'primary.900' : 'primary.50',
               color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : 'primary.700'),
             }}>
-            <Link to={`${user?.login}`}>
+            <Link to={`${user?.login}`} style={{ textDecoration: 'none' }}>
               <Chip
-                component="a"
+                component="button"
                 color="primary"
                 label="View Profile"
                 variant="filled"
                 clickable
-                href={`${user?.login}`}
               />
             </Link>
           </Box>

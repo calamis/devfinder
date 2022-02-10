@@ -1,47 +1,49 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { UsersState, ValidationErrors } from '../../utils/types'
-import axios from 'axios'
-import { AxiosError } from 'axios'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { UsersState, ValidationErrors } from '../../utils/types';
+import axios from 'axios';
+import { AxiosError } from 'axios';
 
 // Define a thunk that disaptches those action creators
 export const fetchUserProfile = createAsyncThunk(
-  "fetch/userProfile", 
+  'fetch/userProfile',
   async (query: string | undefined, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`https://api.github.com/users/${query}`)
-      // const {data} = await axios.get(`https://api.github.com/users/${query}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`) 
+      const { data } = await axios.get(`https://api.github.com/users/${query}`);
+      // const {data} = await axios.get(`https://api.github.com/users/${query}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`)
       return data;
     } catch (err) {
-      let error: AxiosError<ValidationErrors> = err // cast the error for access
+      let error: AxiosError<ValidationErrors> = err; // cast the error for access
       if (!error?.response) {
-        throw err
+        throw err;
       }
-      return rejectWithValue(error?.response?.data)
+      return rejectWithValue(error?.response?.data);
     }
-  }
+  },
 );
 
 export const fetchUserRepos = createAsyncThunk(
-  "fetch/userRepos", 
-  async (query: string | undefined, {rejectWithValue}) => {
+  'fetch/userRepos',
+  async (query: string | undefined, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`https://api.github.com/users/${query}/repos?per_page=10&sort=asc`)
+      const { data } = await axios.get(
+        `https://api.github.com/users/${query}/repos?per_page=10&sort=asc`,
+      );
       return data;
     } catch (err) {
-      let error: AxiosError<ValidationErrors> = err // cast the error for access
+      let error: AxiosError<ValidationErrors> = err; // cast the error for access
       if (!error?.response) {
-        throw err
+        throw err;
       }
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 // initial State
 const initialState = {
   error: null,
-  loading: false
-} as unknown as UsersState
+  loading: false,
+} as unknown as UsersState;
 
 // Create Slice that handle actions in your reducers
 export const githubUserSlice = createSlice({
@@ -52,33 +54,33 @@ export const githubUserSlice = createSlice({
   extraReducers: {
     // user Profile
     [fetchUserProfile.pending.type]: (state) => {
-      state.loading = true
+      state.loading = true;
     },
     [fetchUserProfile.fulfilled.type]: (state, action) => {
-      state.loading = false
-      state.entities = action?.payload
-      state.error = undefined
+      state.loading = false;
+      state.entities = action?.payload;
+      state.error = undefined;
     },
     [fetchUserProfile.rejected.type]: (state, action) => {
-      state.loading = false
-      state.entities = undefined
-      state.error = action?.payload
+      state.loading = false;
+      state.entities = undefined;
+      state.error = action?.payload;
     },
     // User Repo
     [fetchUserRepos.pending.type]: (state) => {
-      state.loading = true
+      state.loading = true;
     },
     [fetchUserRepos.fulfilled.type]: (state, action) => {
-      state.loading = false
-      state.repos = action?.payload
-      state.error = undefined
+      state.loading = false;
+      state.repos = action?.payload;
+      state.error = undefined;
     },
     [fetchUserRepos.rejected.type]: (state, action) => {
-      state.loading = false
-      state.repos = null
-      state.error = action?.payload
-    }
-  }
+      state.loading = false;
+      state.repos = null;
+      state.error = action?.payload;
+    },
+  },
 });
 
-export default githubUserSlice.reducer
+export default githubUserSlice.reducer;
