@@ -11,6 +11,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkIcon from '@mui/icons-material/Link';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import ArrowIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 import { IProfile } from '../../utils/types';
 // redux
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -34,16 +35,7 @@ export default function profile() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <RouterLink to="/" style={{ textDecoration: 'none' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{
-                textDecoration: 'none',
-                marginBottom: '20px',
-                borderRadius: '3px',
-              }}>
-              Back
-            </Button>
+            <ArrowIcon fontSize="large" color="primary" />
           </RouterLink>
           <Card>
             <CardMedia
