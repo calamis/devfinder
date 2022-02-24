@@ -2,7 +2,7 @@
 
 A small project using the Tech Stack that search a specific github user by username.
 
-[View Project](https://devfinder-gules.vercel.app/){:target="_blank" rel="noopener"}
+[View Project](https://devfinder-gules.vercel.app/)
 
 #Tech Stack :
 
