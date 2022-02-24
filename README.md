@@ -3,6 +3,7 @@
 A small project using the Tech Stack that search a specific github user by username.
 
 Visit: <a href="devfinder-gules.vercel.app" target="_blank">View Project</a>
+[go](https://devfinder-gules.vercel.app/){:target="_blank"}.
 
 #Tech Stack :
 
