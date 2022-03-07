@@ -10,8 +10,7 @@ import {
   Typography,
   Chip,
 } from '@mui/material';
-import React, { FunctionComponent } from 'react';
-import { IUserDetails } from '../../utils/types';
+import React from 'react';
 
 interface UserProps {
   user: {
@@ -23,6 +22,7 @@ interface UserProps {
 }
 
 const userItem = ({ user }: UserProps) => {
+  console.log('item', user);
   return (
     <Container maxWidth="md" sx={{ mt: '10px' }}>
       <Card
@@ -54,7 +54,7 @@ const userItem = ({ user }: UserProps) => {
             {user?.location ?? null}
           </Typography>
           <Typography component="div" fontWeight="bold">
-            {user?.name}
+            {user?.login}
           </Typography>
           <Box
             sx={{

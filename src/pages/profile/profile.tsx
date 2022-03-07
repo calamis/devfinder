@@ -69,14 +69,12 @@ export default function profile() {
                         sx={{ color: '#455A64', textTransform: 'lowercase' }}
                         size="small"
                         startIcon={<GroupAddIcon />}>
-                        {' '}
-                        {entities?.followers} Followers{' '}
+                        {entities?.followers} Followers
                       </Button>
                       <Button
                         sx={{ color: '#455A64', textTransform: 'lowercase' }}
                         size="small">
-                        {' '}
-                        {entities?.following} Following{' '}
+                        {entities?.following} Following
                       </Button>
                     </Stack>
                   </Grid>

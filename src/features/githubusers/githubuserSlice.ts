@@ -9,7 +9,24 @@ export const fetchUserProfile = createAsyncThunk(
   async (query: string | undefined, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`https://api.github.com/users/${query}`);
-      // const {data} = await axios.get(`https://api.github.com/users/${query}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`)
+      return data;
+    } catch (err) {
+      let error: AxiosError<ValidationErrors> = err; // cast the error for access
+      if (!error?.response) {
+        throw err;
+      }
+      return rejectWithValue(error?.response?.data);
+    }
+  },
+);
+
+export const fetchUsers = createAsyncThunk(
+  'fetch/userProfile',
+  async (query: string | undefined, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.github.com/search/users?q=${query}&page=1&per_page=9`,
+      );
       return data;
     } catch (err) {
       let error: AxiosError<ValidationErrors> = err; // cast the error for access
@@ -53,15 +70,15 @@ export const githubUserSlice = createSlice({
   reducers: {},
   extraReducers: {
     // user Profile
-    [fetchUserProfile.pending.type]: (state) => {
+    [fetchUsers.pending.type]: (state) => {
       state.loading = true;
     },
-    [fetchUserProfile.fulfilled.type]: (state, action) => {
+    [fetchUsers.fulfilled.type]: (state, action) => {
       state.loading = false;
       state.entities = action?.payload;
       state.error = undefined;
     },
-    [fetchUserProfile.rejected.type]: (state, action) => {
+    [fetchUsers.rejected.type]: (state, action) => {
       state.loading = false;
       state.entities = undefined;
       state.error = action?.payload;

@@ -11,7 +11,7 @@ import { Formik, FormikHelpers, FormikProps, Field, Form } from 'formik';
 
 // redux
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchUserProfile } from '../../features/githubusers/githubuserSlice';
+import { fetchUsers } from '../../features/githubusers/githubuserSlice';
 
 // interface
 interface FormValues {
@@ -24,7 +24,7 @@ const Search = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchUserProfile(user));
+      dispatch(fetchUsers(user));
     }
   }, [dispatch, user]);
 
@@ -41,7 +41,7 @@ const Search = () => {
           }}
           validationSchema={validationSchema}
           onSubmit={(values: FormValues, FormikHelpers: FormikHelpers<FormValues>) => {
-            dispatch(fetchUserProfile(values.username));
+            dispatch(fetchUsers(values.username));
             FormikHelpers.setSubmitting(false);
           }}>
           {(formikProps: FormikProps<FormValues>) => (
